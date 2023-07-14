@@ -33,39 +33,42 @@ function App() {
     // console.log(sendLogin.authtoken !== undefined);
     if (localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null) {
       console.log(localStorage.getItem('token'));
-      setLoggedIn(true);
       dispatch(getAllDecks())}
-    else {
-      setLoggedIn(false)}
   }, [])
 
   useEffect(() => {
-    if (decks && decks !== undefined) {
+    if (decks === null) {
+      console.log('not LoggedIn');
+      setLoggedIn(false);}
+    else {console.log(loggedIn);
+      setLoggedIn(true);
+    }
+  }, [decks])
+
+  /*useEffect(() => {
+    if (decks !== null) {
       console.log('LoggedIn');
       setLoggedIn(true);}
-  }, [])
+    else {console.log(loggedIn);
+      setLoggedIn(false);
+    }
+  }, [decks])*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(currentDeck);
-  }, [currentDeck])
+  }, [currentDeck])*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(currentDeck);
   }, [])
-
-  useEffect(() => {
-    // console.log(sendLogin.authtoken !== undefined);
-    if (localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null) {
-      console.log(localStorage.getItem('token'));
-      setLoggedIn(true);
-      dispatch(getAllDecks())}
-    else {
-      setLoggedIn(false)}
-  }, [loggedIn])
 
   useEffect(() => {
     console.log(loggedIn);
-  }, [loggedIn])
+  }, [loggedIn])*/
+
+  useEffect(() => {
+    console.log(decks);
+  }, [decks])
 
   function closeModal() {
     setAddDeckModalIsOpen(false);
@@ -129,7 +132,8 @@ function App() {
                 setAddWordModalIsOpen={setAddWordModalIsOpen}
                 editWordModalIsOpen={editWordModalIsOpen}
                 setEditWordModalIsOpen={setEditWordModalIsOpen}
-                closeModal={closeModal}/>
+                closeModal={closeModal}
+                setLoggedIn={setLoggedIn}/>
             }>  
           </Route>
           <Route 

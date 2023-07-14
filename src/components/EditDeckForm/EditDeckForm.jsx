@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import './AddNewDeckForm.css';
-import { addNewDeck, removeCard, editCard } from '../../services/actions/cards.js';
+import './EditDeckForm.css';
+import { addNewDeck, removeCard, editCard, editDeck } from '../../services/actions/cards.js';
 import { useSelector, useDispatch } from 'react-redux';
 
-function AddNewDeckForm (props) {
-  const {addDeckModalIsOpen, closeAddDeckModalIsOpen} = props;
+function EditDeckForm ({editDeckModalIsOpen, closeEditDeckModal}) {
   const dispatch = useDispatch();
   const { decks } = useSelector(state => state.cardsReducer);
+  const { currentDeck } = useSelector(state => state.currentDeckReducer);
   const [form, setValue] = useState({ title: '', description: '' });
-  const titleInput = document.getElementById('titleAddFormInput');
-  const descriptionInput = document.getElementById('descriptionAddFormInput');
-  const submitButton = document.getElementById('buttonSubmitAddForm');
-  const titleErrorSpan = document.getElementById('titleSpanAddForm');
-  const descriptionErrorSpan = document.getElementById('descriptionSpanAddForm');
+  const titleInput = document.getElementById('titleEditDeckFormInput');
+  const descriptionInput = document.getElementById('descriptionEditDeckFormInput');
+  const submitButton = document.getElementById('buttonSubmitEditDeckForm');
+  const titleErrorSpan = document.getElementById('titleSpanEditDeckForm');
+  const descriptionErrorSpan = document.getElementById('descriptionSpanEditDeckForm');
 
   function validate() {
     if(titleInput && descriptionInput && !(titleInput.validationMessage || descriptionInput.validationMessage)) 
@@ -27,27 +27,27 @@ function AddNewDeckForm (props) {
   };
 
   useEffect(()=> {
-    if (addDeckModalIsOpen) {
-    setValue({ ...form, title: `DECK #${decks.length + 1}`, descriptionInput: '' });
+    if (editDeckModalIsOpen && currentDeck) {
+    setValue({ ...form, title: currentDeck.title, descriptionInput: currentDeck.description });
     titleInput.placeholder = `DECK #${decks.length + 1}`;
   }
-    if (addDeckModalIsOpen && submitButton !== null) {
+    if (editDeckModalIsOpen && submitButton !== null) {
       submitButton.classList.remove('editProfileForm__button-active', 'button_type_primary');
       submitButton.classList.add('editProfileForm__button-disabled');
       submitButton.disabled = true;
     };
-  if (addDeckModalIsOpen && titleErrorSpan && titleErrorSpan.textContent !== null) {
+  if (editDeckModalIsOpen && titleErrorSpan && titleErrorSpan.textContent !== null) {
     titleErrorSpan.textContent = ''; 
   }
-  if (addDeckModalIsOpen && descriptionErrorSpan && descriptionErrorSpan.textContent !== null) {
+  if (editDeckModalIsOpen && descriptionErrorSpan && descriptionErrorSpan.textContent !== null) {
     descriptionErrorSpan.textContent = ''; 
   }
-  }, [addDeckModalIsOpen])
+  }, [editDeckModalIsOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addNewDeck(form));
-    closeAddDeckModalIsOpen()
+    dispatch(editDeck(currentDeck.slug, form));
+    closeEditDeckModal()
   }
 
   /*useEffect(()=> {
@@ -83,14 +83,14 @@ function AddNewDeckForm (props) {
               className="addNewDeckForm__text addNewDeckForm__title-container"/>
             <span 
               className="login__text input-userNameEditProfile-error login__input-error" 
-              id='titleSpanAddForm'> 
+              id='titleSpanEditDeckForm'> 
             </span>
           </label>
           <label className="addNewDeckForm__label">
             DESCRIPTION
           <input
             name="description" 
-            id='descriptionAddFormInput'
+            id='descriptionEditDeckFormInput'
             type="text" 
             value={form.description}
             onChange={e => {
@@ -100,13 +100,12 @@ function AddNewDeckForm (props) {
             className="addNewDeckForm__description-text addNewDeckForm__description-container"/>
           <span 
             className="login__text input-emailEditProfile-error login__input-error" 
-            id='descriptionSpanAddForm'> 
+            id='descriptionSpanEditDeckForm'> 
           </span>
         </label>
         <button 
           type="submit" 
-          className="addNewDeckForm__addButton addNewDeckForm__button-disabled" 
-          id='buttonSubmitAddForm'>
+          className="addNewDeckForm__addButton addNewDeckForm__button-disabled" id='buttonSubmitEditDeckForm'>
           ADD
         </button>
       </form>
@@ -119,4 +118,4 @@ function AddNewDeckForm (props) {
   )
 }
 
-export default AddNewDeckForm;
+export default EditDeckForm;

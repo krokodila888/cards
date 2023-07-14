@@ -112,11 +112,12 @@ export function deleteDeck(deckID) {
       type: DELETE_DECK
     })
     api.removeDeck(deckID).then( res  => {
-      if (res) {
+      if (res === 204) {
         console.log(res);
+        console.log(deckID);
         dispatch({
           type: DELETE_DECK_SUCCESS,
-          deletedDeck: res
+          ID: deckID
         })
       } else {
         dispatch({

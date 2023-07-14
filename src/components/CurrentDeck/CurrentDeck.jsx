@@ -4,11 +4,11 @@ import DeckCover from '../DeckCover/DeckCover.jsx';
 import add from '../../images/add_button.png';
 import dots from '../../images/dots.png';
 import find from '../../images/find.png';
-import { addNewDeck, removeCard, editCard, deleteDeck } from '../../services/actions/cards.js';
+import { addNewDeck, removeCard, editCard, deleteDeck, editDeck } from '../../services/actions/cards.js';
 import { setCurrentDeck } from '../../services/actions/currentDeck.js';
 import { useSelector, useDispatch } from 'react-redux';
 
-function CurrentDeck({setAddDeckModalIsOpen}) {
+function CurrentDeck({setAddDeckModalIsOpen, setEditDeckModalIsOpen}) {
 
   //const { cards } = useSelector(state => state.cardsReducer);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
@@ -34,7 +34,10 @@ function CurrentDeck({setAddDeckModalIsOpen}) {
   function removeDeck() {
     dispatch(deleteDeck(currentDeck.slug));
     dispatch(setCurrentDeck(decks[0]));
+  }
 
+  function editCurrentDeck() {
+    setEditDeckModalIsOpen(true);
   }
 
   return (
@@ -49,6 +52,11 @@ function CurrentDeck({setAddDeckModalIsOpen}) {
             src={dots} 
             alt="Dots"
             onClick={removeDeck}/>
+            <img 
+            className="currentDeck__dots-img" 
+            src={dots} 
+            alt="Dots"
+            onClick={editCurrentDeck}/>
         </div>
         <h2 className="currentDeck__title">{currentDeck.title}</h2>  
         <div className="currentDeck__input-container">

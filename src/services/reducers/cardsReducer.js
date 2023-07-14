@@ -35,7 +35,7 @@ import {
 const initialState = {
   decksRequest: false,
   decksRequestFailed: false,
-  decks: [],
+  decks: null,
   addDeckRequest: false,
   addDeckRequestFailed: false,
   addDeckRequestRes: null,
@@ -91,7 +91,7 @@ export const cardsReducer = (state = initialState, action) => {
         ...state,
         decks: [
           ...state.decks,
-          action
+          action.newDeck
         ],
         addDeckRequest: false
       };
@@ -103,12 +103,16 @@ export const cardsReducer = (state = initialState, action) => {
         addDeckRequest: false 
       };
     }
-    case DELETE_DECK: {
+    case DELETE_DECK_SUCCESS: {
+      console.log(action);
+      let decksAfterDeleting = state.decks.filter(
+        (item1) => (item1.slug !== action.ID)
+      );
+      console.log(action.ID);
+      console.log(decksAfterDeleting);
       return {
         ...state,
-        decks: state.decks.filter(
-          (item1) => (item1.id !== action.slug)
-        ),
+        decks: [...decksAfterDeleting]
       };
     }
     case EDIT_DECK: {
@@ -118,23 +122,6 @@ export const cardsReducer = (state = initialState, action) => {
         decks: [state.decks.splice(editedOne, 1, action.editedDeck)],
       };
     }
-    /*case DELETE_FLOWER_SUCCESS: {
-      return {
-        ...state,
-        myFlowers: [
-          ...state.myFlowers,
-          action.newFlower
-        ],
-        addFlowerRequest: false
-      };
-    }
-    case DELETE_FLOWER_FAILED: {
-      return { 
-      ...state, 
-        addFlowerRequestFailed: true, 
-        addFlowerRequest: false 
-      };
-    }*/
     default: {
       return state
     }

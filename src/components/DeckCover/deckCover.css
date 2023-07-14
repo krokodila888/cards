@@ -6,6 +6,7 @@
   background-color: #E7E7E7;
   border-radius: 2px;
   padding: 1px;
+  border-radius: 5px;
 }
 
 .deckCover:hover {
@@ -25,6 +26,7 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
+  border-radius: 5px;
 }
 
 .deckCover__addCover {
@@ -39,6 +41,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  border-radius: 5px;
 }
 
 .deckCover__number {
@@ -76,6 +79,7 @@
   bottom: 0px;
   border-bottom: 50px solid #E7E7E7;
   border-left: 50px solid #3C4548;
+  border-radius: 5px;
 }
 
 .deckCover__addCover:before {
@@ -85,6 +89,7 @@
   bottom: 0px;
   border-bottom: 50px solid #E7E7E7;
   border-left: 50px solid #3C4548;
+  border-radius: 5px;
 }
 
 /*@media screen and (max-width: 380px) {

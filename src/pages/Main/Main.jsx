@@ -7,20 +7,29 @@ import Register from '../../components/Register/Register.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
-//import EditDeckForm from '../../components/EditDeckForm/EditDeckForm.jsx';
+import EditDeckForm from '../../components/EditDeckForm/EditDeckForm.jsx';
 import AddNewDeckForm from '../../components/AddNewDeckForm/AddNewDeckForm.jsx';
 
 import Modal from "../../components/Modal/Modal";
 import './Main.css';
 
 function Main(props) {
-  const {loggedIn, closeModal, addDeckModalIsOpen, setAddDeckModalIsOpen, editDeckModalIsOpen, setEditDeckModalIsOpen, addWordModalIsOpen, setAddWordModalIsOpen, editWordModalIsOpen, setEditWordModalIsOpen} = props;
+  const {loggedIn, setLoggedIn, closeModal, addDeckModalIsOpen, setAddDeckModalIsOpen, editDeckModalIsOpen, setEditDeckModalIsOpen, addWordModalIsOpen, setAddWordModalIsOpen, editWordModalIsOpen, setEditWordModalIsOpen} = props;
   //const dispatch = useDispatch();
   const [showLogin, setShowLogin] = React.useState(true);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
 
   function closeAddDeckModalIsOpen() {
     setAddDeckModalIsOpen(false)
+  }
+
+  function closeEditDeckModal() {
+    setEditDeckModalIsOpen(false)
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+    setLoggedIn(false);
   }
 
   return (
@@ -43,8 +52,15 @@ function Main(props) {
           {currentDeck !== {} && currentDeck !== null && currentDeck !== undefined &&
             <CurrentDeck 
               addDeckModalIsOpen={addDeckModalIsOpen}
-              setAddDeckModalIsOpen={setAddDeckModalIsOpen}/>}
+              setAddDeckModalIsOpen={setAddDeckModalIsOpen}
+              editDeckModalIsOpen={editDeckModalIsOpen}
+              setEditDeckModalIsOpen={setEditDeckModalIsOpen}/>}
         </main>
+        {loggedIn && 
+        <button
+          onClick={handleLogout}>
+          Выход
+        </button>}
       </div>
       <Footer/>
       <Modal
@@ -52,8 +68,16 @@ function Main(props) {
         onClose={closeModal}
         children={
           <AddNewDeckForm 
-          closeAddDeckModalIsOpen={closeAddDeckModalIsOpen}
+            closeAddDeckModalIsOpen={closeAddDeckModalIsOpen}
             addDeckModalIsOpen={addDeckModalIsOpen} />}>
+      </Modal>
+      <Modal
+        isOpen={editDeckModalIsOpen}
+        onClose={closeModal}
+        children={
+          <EditDeckForm 
+            closeEditDeckModal={closeEditDeckModal} 
+            editDeckModalIsOpen={editDeckModalIsOpen} />}>
       </Modal>
 
     </>

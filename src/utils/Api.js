@@ -21,7 +21,6 @@ export class Api {
       headers: {
         'Content-Type': 'application/json'
       },
-      //credentials: 'include',
       body: JSON.stringify(data)
       })
     .then(this._handleResult)
@@ -34,11 +33,7 @@ export class Api {
       headers: {
         'Content-Type': 'application/json'
       },
-      //credentials: 'include',
-      body: JSON.stringify(/*{
-        'email': data.email,
-        'password': data.password
-        }*/data)
+      body: JSON.stringify(data)
     })
     .then(this._handleResult)
   }
@@ -118,7 +113,9 @@ export class Api {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + `${localStorage.getItem('token')}`
       }
-    }).then(this._handleResult)
+    })
+    .then((response) => { return response.status})
+    /*.then(this._handleResult)*/
   }
 
   addCard(deckID, data) {

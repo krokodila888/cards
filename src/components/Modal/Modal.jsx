@@ -49,7 +49,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         <ModalOverlay isOpen={isOpen} />
       </div>
       <div className='modal__container'>
-        <div className="modal__button-container">
+        <div className="modal__close-button">
           <img src={exit} alt='Иконка закрытия' onClick={handleClose} />
         </div>
         {children}
