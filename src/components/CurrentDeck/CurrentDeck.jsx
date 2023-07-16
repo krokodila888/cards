@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from "react";
 import './CurrentDeck.css';
 import DeckCover from '../DeckCover/DeckCover.jsx';
+import RepeatingMode from '../RepeatingMode/RepeatingMode.jsx';
 import add from '../../images/add_button.png';
 import dots from '../../images/dots.png';
 import find from '../../images/find.png';
-import { addNewDeck, removeCard, editCard, deleteDeck, editDeck } from '../../services/actions/cards.js';
+import { addNewDeck, removeCard, editCard, deleteDeck, editDeck, getDeckCardsInfo } from '../../services/actions/cards.js';
 import { setCurrentDeck } from '../../services/actions/currentDeck.js';
 import { useSelector, useDispatch } from 'react-redux';
 
-function CurrentDeck({setAddDeckModalIsOpen, setEditDeckModalIsOpen}) {
+function CurrentDeck(props) {
 
   //const { cards } = useSelector(state => state.cardsReducer);
+  const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen} = props;
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
-  const { decks } = useSelector(state => state.cardsReducer);
+  const { decks, deckCards } = useSelector(state => state.cardsReducer);
   const dispatch = useDispatch();
-  const [showCards, setShowCards] = useState(false);
-  const [addNewDeckForm, setNewDeckFormValue] = useState({ title: '' });
-  const [form, setValue] = useState({ text: '', translation: '' });
-  const [repeatingForm, setMeaning] = useState({ word: '' });
-  const [editingForm, setEditedMeaning] = useState({ text: '', translation: '', ID: 0 });
-  const [decksToRender, setDecksToRender] = useState([]);
-  const [wordsToRepeat, setWordsToRepeat] = useState([]);
-  const repeatingInput = document.getElementById('cardsHolderRepeatingInput');
+  const [repeatMode, setRepeatMode] = useState(false);
+  const [searchForm, setSearchFormValue] = useState({ search: '' });
 
+  useEffect(() => {
+    dispatch(getDeckCardsInfo(currentDeck.slug))
+  }, [currentDeck])
+
+  
   const onAddNewDeckChange = e => {
-    setNewDeckFormValue({ ...addNewDeckForm, [e.target.name]: e.target.value });
+    setSearchFormValue({ ...searchForm, [e.target.name]: e.target.value });
   };
 
   function showAddNewDeckForm() {
     setAddDeckModalIsOpen(true);
+  }
+
+  function showAddWordForm() {
+    setAddWordModalIsOpen(true);
+  }
+
+  function showEditWordForm() {
+    setEditWordModalIsOpen(true);
   }
 
   function removeDeck() {
@@ -38,6 +47,10 @@ function CurrentDeck({setAddDeckModalIsOpen, setEditDeckModalIsOpen}) {
 
   function editCurrentDeck() {
     setEditDeckModalIsOpen(true);
+  }
+
+  function startRepeating() {
+    setRepeatMode(true);
   }
 
   return (
@@ -61,8 +74,8 @@ function CurrentDeck({setAddDeckModalIsOpen, setEditDeckModalIsOpen}) {
         <h2 className="currentDeck__title">{currentDeck.title}</h2>  
         <div className="currentDeck__input-container">
           <input 
-            placeholder="New deck title" 
-            value={addNewDeckForm.title} 
+            placeholder="Searching for words" 
+            value={searchForm.search} 
             name="title" 
             onChange={onAddNewDeckChange}
             type="text"
@@ -72,10 +85,46 @@ function CurrentDeck({setAddDeckModalIsOpen, setEditDeckModalIsOpen}) {
             src={find} 
             alt="Лупа"
             />
-        </div>     
-        <div className="cardsHolder__decksContainer">
+        </div>
+        <div className="currentDeck__button-container">
+          <button 
+            type="button" 
+            className="addNewDeckForm__addButton addNewDeckForm__button-disabled"
+            onClick={showAddWordForm}>
+            ADD
+          </button>
+          <button 
+            type="button" 
+            className="addNewDeckForm__addButton addNewDeckForm__button-disabled"
+            onClick={showEditWordForm}>
+            EDIT
+          </button>
+          <button 
+            type="button" 
+            className="addNewDeckForm__addButton addNewDeckForm__button-disabled">
+            DELETE
+          </button> 
         </div>
       </section>
+      <div className="cardsHolder__wordsContainer">
+          {deckCards !== null && deckCards.map((item, i) => (
+            <p 
+              key={i} 
+              item={item} 
+              className="currentDeck__word">
+                {item.front_side}
+            </p>
+          ))
+        }
+      </div>
+      <button
+          onClick={startRepeating}
+          className="addNewDeckForm__addButton">
+          REPEAT
+        </button>
+        {repeatMode && 
+      <RepeatingMode 
+      setRepeatMode={setRepeatMode} />}
     </>
   );
 }  

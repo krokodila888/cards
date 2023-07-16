@@ -32,6 +32,9 @@ import {
   GET_TODAY_CARDS,
   GET_TODAY_CARDS_FAILED,
   GET_TODAY_CARDS_SUCCESS,
+  GET_DECK_CARDS,
+  GET_DECK_CARDS_FAILED,
+  GET_DECK_CARDS_SUCCESS,
 } from "../../utils/constants";
 
 export function getAllDecks() {
@@ -157,11 +160,15 @@ export function getDeckInfo() {
 } 
 
 export function addNewCard(deckID, data) {
+  /*console.log(deckID);
+  console.log(data);*/
   return function(dispatch) {
+    console.log(deckID);
+    console.log(data);
     dispatch({
       type: ADD_CARD
     })
-    api.addNewCard(deckID, data).then( res  => {
+    api.addCard(deckID, data).then( res  => {
       if (res) {
         dispatch({
           type: ADD_CARD_SUCCESS,
@@ -179,6 +186,30 @@ export function addNewCard(deckID, data) {
     })
   }
 }
+
+/*export function addNewDeck(data) {
+  return function(dispatch) {
+    dispatch({
+      type: ADD_DECK
+    })
+    api.addNewDeck(data).then( res  => {
+      if (res) {
+        dispatch({
+          type: ADD_DECK_SUCCESS,
+          newDeck: res
+        })
+      } else {
+        dispatch({
+          type: ADD_DECK_FAILED
+        })
+      }
+    }).catch( err => {
+      dispatch({
+        type: ADD_DECK_FAILED
+      })
+    })
+  }
+}*/
 
 export function editCard(deckID, cardID, data) {
   return function(dispatch) {
@@ -247,6 +278,31 @@ export function getTodayCardsInfo(deckID) {
     }).catch( err => {
       dispatch({
         type: GET_TODAY_CARDS_FAILED
+      })
+    })
+  }
+}
+
+export function getDeckCardsInfo(deckID) {
+  return function(dispatch) {
+    dispatch({
+      type: GET_DECK_CARDS
+    })
+    api.getDeckCards(deckID).then( res  => {
+      if (res) {
+        console.log(res);
+        dispatch({
+          type: GET_DECK_CARDS_SUCCESS,
+          deckCards: res
+        })
+      } else {
+        dispatch({
+          type: GET_DECK_CARDS_FAILED
+        })
+      }
+    }).catch( err => {
+      dispatch({
+        type: GET_DECK_CARDS_FAILED
       })
     })
   }

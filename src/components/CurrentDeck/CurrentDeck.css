@@ -78,7 +78,26 @@
   padding-top: 30px;
 }
 
+.cardsHolder__wordsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
+.currentDeck__word {
+  background-color: #FEF0E6;
+  color: #A33C00;
+  font-size: 24px;
+  padding: 4px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.currentDeck__button-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 @media screen and (max-width: 570px) {
   .cardsHolder__input {

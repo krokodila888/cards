@@ -13,6 +13,7 @@ import { getAllDecks } from '../../services/actions/cards';
 /*import { ERROR_MESSAGE } from '../../utils/constants.js';*/
 //import { getUserData } from '../../services/actions/auth';
 import './App.css';
+import { setCurrentDeck } from "../../services/actions/currentDeck.js";
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
   const [addWordModalIsOpen, setAddWordModalIsOpen] = React.useState(false);
   const [editWordModalIsOpen, setEditWordModalIsOpen] = React.useState(false);
   //const [isLoading, setIsLoading] = useState(false);
-  const { decks } = useSelector(state => state.cardsReducer);
+  const { decks, deckCards } = useSelector(state => state.cardsReducer);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
   const { userDataRequestRes, sendLogin } = useSelector(state => state.authReducer);
 
@@ -44,6 +45,17 @@ function App() {
       setLoggedIn(true);
     }
   }, [decks])
+
+  useEffect(() => {
+    if (decks && decks !== null && decks.length > 0) {
+      console.log(decks[0]);
+      dispatch(setCurrentDeck(decks[0], 0))
+    }
+  }, [decks])
+
+  useEffect(() => {
+    console.log(deckCards)
+  }, [currentDeck])
 
   /*useEffect(() => {
     if (decks !== null) {

@@ -170,6 +170,17 @@ export class Api {
     }).then(this._handleResult)
   }
 
+  getDeckCards(deckID) {
+    console.log(deckID);
+    return fetch(`${this._bazeUrl}//v1/dashboard/${deckID}/cards/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + `${localStorage.getItem('token')}`
+      }
+    }).then(this._handleResult)
+  }
+
   /*signOut() {
     return fetch(`${bazeUrl}/signout`, {
       method: 'GET',

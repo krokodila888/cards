@@ -30,6 +30,9 @@ import {
   GET_TODAY_CARDS,
   GET_TODAY_CARDS_FAILED,
   GET_TODAY_CARDS_SUCCESS,
+  GET_DECK_CARDS,
+  GET_DECK_CARDS_FAILED,
+  GET_DECK_CARDS_SUCCESS,
 } from "../../utils/constants";
   
 const initialState = {
@@ -49,11 +52,12 @@ const initialState = {
   addCardRequestFailed: false,
   addCardRequestRes: null,
   editCardRequest: false,
-  editCardequestFailed: false,
+  editCardRequestFailed: false,
   editCardRequestRes: null,
   removeCardRequest: false,
   removeCardRequestFailed: false,
   removeCardRequestRes: null,
+  deckCards: null
 }
 
 export const cardsReducer = (state = initialState, action) => {
@@ -115,11 +119,43 @@ export const cardsReducer = (state = initialState, action) => {
         decks: [...decksAfterDeleting]
       };
     }
-    case EDIT_DECK: {
-      const editedOne = state.decks.indexOf((item1) => (item1.id === action.editedDeck.id));
+    case EDIT_DECK_SUCCESS: {
+      let newDecks = state.decks.map(item => {if (item.slug === action.editedDeck.slug) {console.log (item); return action.editedDeck} else return item});
       return {
         ...state,
-        decks: [state.decks.splice(editedOne, 1, action.editedDeck)],
+        decks: newDecks
+      };
+    }
+    case ADD_CARD: {
+      return {
+        ...state,
+        addCardRequest: true,
+        addCardRequestFailed: false,
+      };
+    }
+    case ADD_CARD_SUCCESS: {
+      //let newDecks = state.decks.map(item => {if (item.slug === action.editedDeck.slug) {console.log (item); return action.editedDeck} else return item});
+      return {
+        ...state,
+        addCardRequestRes: action.newCard,
+        deckCards: [
+          ...state.deckCards,
+          action.newCard
+        ],
+      };
+    }
+    case ADD_CARD_FAILED: {
+      return { 
+        ...state,
+        addCardRequestFailed: true, 
+        addCardRequest: false 
+      };
+    }
+    case GET_DECK_CARDS_SUCCESS: {
+      //let newDecks = state.decks.map(item => {if (item.slug === action.editedDeck.slug) {console.log (item); return action.editedDeck} else return item});
+      return {
+        ...state,
+        deckCards: action.deckCards
       };
     }
     default: {

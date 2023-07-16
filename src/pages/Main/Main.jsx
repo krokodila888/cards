@@ -9,6 +9,7 @@ import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import EditDeckForm from '../../components/EditDeckForm/EditDeckForm.jsx';
 import AddNewDeckForm from '../../components/AddNewDeckForm/AddNewDeckForm.jsx';
+import AddNewWordForm from '../../components/AddNewWordForm/AddNewWordForm.jsx';
 
 import Modal from "../../components/Modal/Modal";
 import './Main.css';
@@ -25,6 +26,10 @@ function Main(props) {
 
   function closeEditDeckModal() {
     setEditDeckModalIsOpen(false)
+  }
+
+  function closeAddWordModal() {
+    setAddWordModalIsOpen(false)
   }
 
   function handleLogout() {
@@ -49,17 +54,19 @@ function Main(props) {
           {loggedIn && 
             <CardsHolder
               setAddDeckModalIsOpen={setAddDeckModalIsOpen}/>}
-          {currentDeck !== {} && currentDeck !== null && currentDeck !== undefined &&
+          {loggedIn && currentDeck !== {} && currentDeck !== null && currentDeck !== undefined &&
             <CurrentDeck 
               addDeckModalIsOpen={addDeckModalIsOpen}
               setAddDeckModalIsOpen={setAddDeckModalIsOpen}
               editDeckModalIsOpen={editDeckModalIsOpen}
-              setEditDeckModalIsOpen={setEditDeckModalIsOpen}/>}
+              setEditDeckModalIsOpen={setEditDeckModalIsOpen}
+              setAddWordModalIsOpen={setAddWordModalIsOpen}/>}
         </main>
         {loggedIn && 
         <button
-          onClick={handleLogout}>
-          Выход
+          onClick={handleLogout}
+          className="addNewDeckForm__addButton">
+          EXIT
         </button>}
       </div>
       <Footer/>
@@ -78,6 +85,14 @@ function Main(props) {
           <EditDeckForm 
             closeEditDeckModal={closeEditDeckModal} 
             editDeckModalIsOpen={editDeckModalIsOpen} />}>
+      </Modal>
+      <Modal
+        isOpen={addWordModalIsOpen}
+        onClose={closeModal}
+        children={
+          <AddNewWordForm 
+            closeAddWordModal={closeAddWordModal}
+            addWordModalIsOpen={addWordModalIsOpen} />}>
       </Modal>
 
     </>

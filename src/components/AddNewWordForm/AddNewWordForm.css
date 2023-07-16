@@ -67,7 +67,7 @@
   cursor: default;
 }
 
-.editDeckForm__button-active:hover {
+.editProfileForm__button-active:hover {
   opacity: 0.5;
   cursor: pointer;
   transition: 0.5s;

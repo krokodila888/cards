@@ -76,52 +76,7 @@ function CardsHolder({setAddDeckModalIsOpen}) {
 export default CardsHolder;
 
 /*
- {!addNewCard &&
-      <div className='cardsHolder__button-block'>
-        {!repeatMode && <button className='cardsHolder__button' onClick={showAddForm}>
-          Добавить карточку
-        </button>}
-        {decks.length !== 0 && decks !== [] && !repeatMode && 
-          <button className='cardsHolder__button' onClick={startRepeating}>
-            Повторить слова
-          </button>}
-        {decks !== [] && decks.length !== 0 && !repeatMode && 
-          <button className='cardsHolder__button' onClick={showAllCards}>
-            Посмотреть на карточки
-          </button>}
-      </div>}
-      {addNewCard && 
-      <form className='cardsHolder__form' onSubmit={handleSubmit}>
-        <input 
-          placeholder="Слово на иностранном языке" 
-          value={form.text} 
-          name="text" 
-          onChange={onChange}
-          required
-          type="text"
-          className='cardsHolder__input'/>
-        <input 
-          placeholder="Перевод слова" 
-          value={form.translation} 
-          name="translation" 
-          onChange={onChange}
-          required
-          type="text"
-          className='cardsHolder__input' />
-        <div className='cardsHolder__button-block'>
-          <button 
-            className='cardsHolder__button'
-            type="submit"
-            onClick={handleSubmit}>
-              Сохранить
-          </button>
-          <button 
-            className='cardsHolder__button'
-            onClick={handleClose}>
-              Закрыть
-          </button>
-        </div>
-      </form>}
+
       {repeatMode && 
       <div className='cardsHolder__form'>
         <div>
@@ -161,70 +116,12 @@ export default CardsHolder;
         ))
       }
       </div>
-      {showCards && decks !== [] && editItem && 
-        <form className='cardsHolder__form' onSubmit={handleEditSubmit}>
-          <input 
-            placeholder='Слово на иностранном языке' 
-            value={editingForm.text} 
-            name="text" 
-            onChange={onEditChange}
-            required
-            type="text"
-            className='cardsHolder__input'/>
-          <input 
-            placeholder='Более точный перевод' 
-            value={editingForm.translation} 
-            name="translation" 
-            onChange={onEditChange}
-            required
-            type="text"
-            className='cardsHolder__input' />
-          <div className='cardsHolder__button-block'>
-            <button 
-              className='cardsHolder__button'
-              type="submit">
-                Вот так лучше
-            </button>
-            <button 
-              className='cardsHolder__button'
-              onClick={closeEditCard}>
-                Оставим как было
-            </button>
-          </div>
-        </form>}
+
       {showCards && decks !== [] && 
         <button 
           className='cardsHolder__button cardsHolder__button1'
           onClick={hideAllCards}>
             Скрыть
         </button>
-      }
-      */
-
-      /*
-      {showAddForm && 
-      <form className='cardsHolder__form' onAddSubmit={handleAddSubmit}>
-        <input 
-          placeholder="New deck title" 
-          value={addNewDeckForm.title} 
-          name="title" 
-          onChange={onAddNewDeckChange}
-          required
-          type="text"
-          className='cardsHolder__input' />
-        <div className='cardsHolder__button-block'>
-          <button 
-            className='cardsHolder__button'
-            type="submit"
-            onClick={handleAddSubmit}>
-              Save
-          </button>
-          <button 
-            className='cardsHolder__button'
-            onClick={handleClose}>
-              Close
-          </button>
-        </div>
-      </form>
       }
       */
