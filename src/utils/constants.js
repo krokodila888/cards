@@ -92,3 +92,5 @@ export const GET_DECK_CARDS_SUCCESS = 'GET_DECK_CARDS_SUCCESS';
 
 export const SET_DECK = 'SET_DECK';
 export const CLEAR_CURRENT_DECK = 'CLEAR_CURRENT_DECK';
+export const SET_WORD = 'SET_WORD';
+export const CLEAR_CURRENT_WORD = 'CLEAR_CURRENT_WORD';

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import './CurrentDeck.css';
 import DeckCover from '../DeckCover/DeckCover.jsx';
+import CurrentWord from '../CurrentWord/CurrentWord.jsx';
 import RepeatingMode from '../RepeatingMode/RepeatingMode.jsx';
 import add from '../../images/add_button.png';
 import dots from '../../images/dots.png';
 import find from '../../images/find.png';
 import { addNewDeck, removeCard, editCard, deleteDeck, editDeck, getDeckCardsInfo } from '../../services/actions/cards.js';
 import { setCurrentDeck } from '../../services/actions/currentDeck.js';
+import { setCurrentWord } from '../../services/actions/currentWord.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 function CurrentDeck(props) {
@@ -14,6 +16,7 @@ function CurrentDeck(props) {
   //const { cards } = useSelector(state => state.cardsReducer);
   const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen} = props;
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
+  const { currentWord } = useSelector(state => state.currentWordReducer);
   const { decks, deckCards } = useSelector(state => state.cardsReducer);
   const dispatch = useDispatch();
   const [repeatMode, setRepeatMode] = useState(false);
@@ -51,6 +54,11 @@ function CurrentDeck(props) {
 
   function startRepeating() {
     setRepeatMode(true);
+  }
+
+  function chooseWord(item) {
+    console.log(item);
+    dispatch(setCurrentWord(item));
   }
 
   return (
@@ -105,23 +113,29 @@ function CurrentDeck(props) {
             DELETE
           </button> 
         </div>
+        {currentWord && currentWord !== null &&
+          <CurrentWord/>
+        }
       </section>
       <div className="cardsHolder__wordsContainer">
           {deckCards !== null && deckCards.map((item, i) => (
             <p 
               key={i} 
               item={item} 
-              className="currentDeck__word">
+              className="currentDeck__word"
+              onClick={e => chooseWord(item)}>
                 {item.front_side}
             </p>
           ))
         }
       </div>
+      {currentDeck && deckCards && deckCards.length > 0 &&
       <button
           onClick={startRepeating}
           className="addNewDeckForm__addButton">
           REPEAT
         </button>
+      }
         {repeatMode && 
       <RepeatingMode 
       setRepeatMode={setRepeatMode} />}
