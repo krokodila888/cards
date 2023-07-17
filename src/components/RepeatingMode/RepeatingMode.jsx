@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import './RepeatingMode.css';
-import DeckCover from '../DeckCover/DeckCover.jsx';
-import add from '../../images/add_button.png';
-import dots from '../../images/dots.png';
-import find from '../../images/find.png';
 import { addNewDeck, removeCard, editCard, deleteDeck, editDeck, getDeckCardsInfo } from '../../services/actions/cards.js';
-import { setCurrentDeck } from '../../services/actions/currentDeck.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 function RepeatingMode(props) {
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const [showWord, setShowWord] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  //const [showCards, setShowCards] = useState(false);
   const [currentWord, setCurrentWord] = useState({});
   const [repeatingForm, setMeaning] = useState({ word: '' });
   const [repeatedWords, setRepeatedWords] = useState([]);
@@ -27,15 +21,20 @@ function RepeatingMode(props) {
   useEffect(()=> {
     if (deckCards && deckCards !== []) 
     {setWordsToRepeat(deckCards);
-    setCurrentWord(wordsToRepeat[0]);}
+    setCurrentWord(deckCards[0]);}
   }, [])
 
   useEffect(()=> {
     if (deckCards && deckCards !== []) {
       setWordsToRepeat(deckCards);
-      setCurrentWord(wordsToRepeat[0]);
+      setCurrentWord(deckCards[0]);
     }
   }, [deckCards])
+
+  useEffect(()=> {
+    console.log(wordsToRepeat);
+    console.log(currentWord)
+  }, [currentWord])
 
   function showTranslation() {
     setShowWord(true);
@@ -55,17 +54,25 @@ function RepeatingMode(props) {
   function word() {
     return (
     <>
+      {currentWord && currentWord !== {} &&
       <p className="cardsHolder__title">
         {currentWord.back_side}
       </p>
+      }
       {showWord && 
       <>
-        <p className="cardsHolder__title">
-          {currentWord.front_side}
-        </p>
-        <p>Рекомендуем напечатать правильный вариант все равно: так он лучше запомнится</p>
+        {currentWord && currentWord !== {} && 
+        <>
+          <p className="cardsHolder__title">
+            {currentWord.front_side}
+          </p>
+          <p>
+            Рекомендуем напечатать правильный вариант все равно: так он лучше запомнится
+          </p>
+        </>}
       </>}
-    </>)
+    </>
+    )
   }
 
   useEffect(()=> {
@@ -85,7 +92,7 @@ function RepeatingMode(props) {
     repeatingInput.classList.remove('cardsHolder__input_active');
     if (wordsToRepeat.length > 1) {setCurrentWord(wordsToRepeat[1]); 
     setWordsToRepeat(wordsToRepeat.slice(1));}
-    else {setCurrentWord({text: 'Правда все. Добавьте новые карточки (или подождите, пока мы добавим кнопку "Начать заново"', translation: 'Вы повторили все!'})}
+    else {setCurrentWord({front_side: 'Правда все. Добавьте новые карточки (или подождите, пока мы добавим кнопку "Начать заново"', back_side: 'Вы повторили все!'})}
   }
 
 
@@ -109,17 +116,17 @@ function RepeatingMode(props) {
           <button 
             className='cardsHolder__button'
             onClick={showTranslation}>
-              Показать слово
+              SHOW WORD
           </button>
           <button 
             className='cardsHolder__button'
             onClick={stopRepeating}>
-              Закончить
+              FINISH REPEATING
           </button>
           <button 
             className='cardsHolder__button'
             onClick={nextWord1}>
-              Следующая
+              NEXT ONE
           </button>
         </div>
       </div>
