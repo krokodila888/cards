@@ -13,6 +13,7 @@ function CurrentWord(props) {
 
   //const { cards } = useSelector(state => state.cardsReducer);
   //const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen} = props;
+  const {setEditWordModalIsOpen} = props;
   const { currentDeck, currentWord } = useSelector(state => state.currentDeckReducer);
   const { decks, deckCards } = useSelector(state => state.cardsReducer);
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ function CurrentWord(props) {
     dispatch(removeCurrentWord());
   }
 
-  /*function editCurrentDeck() {
-    setEditDeckModalIsOpen(true);
-  }*/
+  function editCurrentWord() {
+    setEditWordModalIsOpen(true);
+  }
 
   return (
     currentWord && 
@@ -49,6 +50,7 @@ function CurrentWord(props) {
         <button 
           type="button" 
           className="addNewDeckForm__addButton addNewDeckForm__button-disabled"
+          onClick={editCurrentWord}
           >
           EDIT
         </button>

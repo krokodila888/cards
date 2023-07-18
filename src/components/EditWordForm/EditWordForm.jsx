@@ -5,17 +5,18 @@ import { addNewDeck, removeCard, editCard, addNewCard } from '../../services/act
 import { useSelector, useDispatch } from 'react-redux';
 
 function EditWordForm (props) {
-  const {addWordModalIsOpen, closeAddWordModal} = props;
+  const {editWordModalIsOpen, closeEditWordModal} = props;
   const dispatch = useDispatch();
   const { decks } = useSelector(state => state.cardsReducer);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
+  const { currentWord } = useSelector(state => state.currentWordReducer);
   const [form, setValue] = useState({front_side: '', back_side: '', prompt: '', example: '' });
   const [deckSlug, setDeckSlug] = useState('');
-  const titleInput = document.getElementById('titleEditFormInput');
-  const descriptionInput = document.getElementById('descriptionEditFormInput');
-  const submitButton = document.getElementById('buttonSubmitEditForm');
-  const titleErrorSpan = document.getElementById('titleSpanEditForm');
-  const descriptionErrorSpan = document.getElementById('descriptionSpanEditForm');
+  const titleInput = document.getElementById('titleAddFormInput');
+  const descriptionInput = document.getElementById('descriptionAddFormInput');
+  const submitButton = document.getElementById('buttonSubmitAddForm');
+  const titleErrorSpan = document.getElementById('titleSpanAddForm');
+  const descriptionErrorSpan = document.getElementById('descriptionSpanAddForm');
 
   /*function validate() {
     if(titleInput && descriptionInput && !(titleInput.validationMessage || descriptionInput.validationMessage)) 
@@ -29,8 +30,11 @@ function EditWordForm (props) {
   };
 
   useEffect(()=> {
-    setDeckSlug(currentDeck.slug)
-  }, [addWordModalIsOpen])
+    if (editWordModalIsOpen) {
+      setDeckSlug(currentDeck.slug);
+      setValue({front_side: currentWord.front_side, back_side: currentWord.back_side, prompt: currentWord.prompt, example: currentWord.example })
+    }
+  }, [editWordModalIsOpen])
 
   /*useEffect(()=> {
     if (addDeckModalIsOpen) {
@@ -54,8 +58,9 @@ function EditWordForm (props) {
     e.preventDefault();
     console.log({deckSlug, form});
     console.log(form);
-    dispatch(addNewCard(deckSlug, form));
-    closeAddWordModal()
+    console.log(currentWord.id);
+    dispatch(editCard(deckSlug, currentWord.id, form));
+    closeEditWordModal()
   }
 
   return(
@@ -72,7 +77,7 @@ function EditWordForm (props) {
             <input 
               required 
               name="front_side"
-              id='titleEditFormInput'
+              id='titleAddFormInput'
               type="text" 
               value={form.front_side}
               onChange={e => {
@@ -89,7 +94,7 @@ function EditWordForm (props) {
             TRANSLATION
             <input
               name="back_side" 
-              id='descriptionEditFormInput'
+              id='descriptionAddFormInput'
               type="text" 
               value={form.back_side}
               onChange={e => {
@@ -106,14 +111,14 @@ function EditWordForm (props) {
             DESCRIPTION OR PROMPT
             <input
               name="prompt" 
-              id='descriptionEditFormInput'
+              id='descriptionAddFormInput'
               type="text" 
               value={form.prompt}
               onChange={e => {
                 onChange(e);
                 /*if (descriptionInput) 
               return (descriptionErrorSpan.textContent = descriptionInput.validationMessage)*/}} 
-              className="addNewDeckForm__description-text addNewDeckForm__description-container"/>
+              className="addNewDeckForm__description-text addNewDeckForm__middle-input"/>
             <span 
               className="login__text input-emailEditProfile-error login__input-error" 
               id='descriptionSpanAddForm'> 
@@ -123,14 +128,14 @@ function EditWordForm (props) {
             EXAMPLES OF USING
             <input
               name="example" 
-              id='exampleEditFormInput'
+              id='descriptionAddFormInput'
               type="text" 
               value={form.example}
               onChange={e => {
                 onChange(e);
                 /*if (descriptionInput) 
               return (descriptionErrorSpan.textContent = descriptionInput.validationMessage)*/}} 
-              className="addNewDeckForm__description-text addNewDeckForm__description-container"/>
+              className="addNewDeckForm__description-text addNewDeckForm__middle-input"/>
             <span 
               className="login__text input-emailEditProfile-error login__input-error" 
               id='descriptionSpanAddForm'> 
@@ -139,8 +144,8 @@ function EditWordForm (props) {
           <button 
             type="submit" 
             className="addNewDeckForm__addButton addNewDeckForm__button-disabled" 
-            id='buttonSubmitEditWordForm'>
-            ADD
+            id='buttonSubmitAddWordForm'>
+            SAVE
           </button>
         </form>
         <div className="addNewDeckForm__deck">

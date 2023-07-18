@@ -113,7 +113,7 @@ function AddNewWordForm (props) {
                 onChange(e);
                 /*if (descriptionInput) 
               return (descriptionErrorSpan.textContent = descriptionInput.validationMessage)*/}} 
-              className="addNewDeckForm__description-text addNewDeckForm__description-container"/>
+              className="addNewDeckForm__description-text addNewDeckForm__middle-input"/>
             <span 
               className="login__text input-emailEditProfile-error login__input-error" 
               id='descriptionSpanAddForm'> 
@@ -130,7 +130,7 @@ function AddNewWordForm (props) {
                 onChange(e);
                 /*if (descriptionInput) 
               return (descriptionErrorSpan.textContent = descriptionInput.validationMessage)*/}} 
-              className="addNewDeckForm__description-text addNewDeckForm__description-container"/>
+              className="addNewDeckForm__description-text addNewDeckForm__middle-input"/>
             <span 
               className="login__text input-emailEditProfile-error login__input-error" 
               id='descriptionSpanAddForm'> 

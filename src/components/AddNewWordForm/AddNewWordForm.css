@@ -84,7 +84,7 @@
   border-radius: 5px;
   height: 62px;
   width: 358px;
-  border: ipx solid #9A9090;
+  border: 1px solid #9A9090;
 }
 
 .addNewDeckForm__description-container {
@@ -92,7 +92,15 @@
   border-radius: 5px;
   height: 136px;
   width: 358px;
-  border: ipx solid #9A9090;
+  border: 1px solid #9A9090;
+}
+
+.addNewDeckForm__middle-input {
+  background-color: white;
+  border-radius: 5px;
+  height: 96px;
+  width: 358px;
+  border: 1px solid #9A9090;
 }
 
 .addNewDeckForm__label {
@@ -180,4 +188,16 @@
   position: relative;
   align-items: center;
   gap: 4px;
+}
+
+@media screen and (max-width: 770px) {
+  .editProfileForm__container {
+    padding: 40px 0px 40px 0px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .editProfileForm__container {
+    padding: 40px 20px 40px 20px;
+  }
 }

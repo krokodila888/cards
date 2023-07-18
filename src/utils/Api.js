@@ -130,7 +130,7 @@ export class Api {
   }
 
   editCard(deckID, cardID, data) {
-    return fetch(`${this._bazeUrl}/v1/dashboard/${deckID}/cards/${cardID}`, {
+    return fetch(`${this._bazeUrl}/v1/dashboard/${deckID}/cards/${cardID}/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -147,7 +147,8 @@ export class Api {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + `${localStorage.getItem('token')}`
       }
-    }).then(this._handleResult)
+    }).then((response) => { return response.status})
+    //.then(this._handleResult)
   }
 
   getCardInfo(deckID, cardID) {
