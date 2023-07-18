@@ -1,10 +1,13 @@
 import {
   SET_DECK,
-  CLEAR_CURRENT_DECK
+  CLEAR_CURRENT_DECK,
+  SET_WORD,
+  CLEAR_CURRENT_WORD
 } from "../../utils/constants";
 
 const initialState = {
-  currentDeck: {}
+  currentDeck: {},
+  currentWord: null
 }
 
 export const currentDeckReducer = (state = initialState, action) => {
@@ -13,6 +16,12 @@ export const currentDeckReducer = (state = initialState, action) => {
       return {
         ...state,
         currentDeck: action.item,
+        currentWord: null
+      }
+    case SET_WORD:
+      return {
+        ...state,
+        currentWord: action.item,
       }
     case CLEAR_CURRENT_DECK:
       return initialState

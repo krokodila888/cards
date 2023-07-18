@@ -94,6 +94,12 @@
   border-radius: 5px;
 }
 
+.currentDeck__word:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.7s;
+}
+
 .currentDeck__button-container {
   display: flex;
   justify-content: space-between;
@@ -182,19 +188,6 @@
   }
 }
 
-.cardsHolder__content {
-  justify-items: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 60px 70px 100px 70px;
-  max-width: 1140px;
-  min-height: 400px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .cardsHolder__decksContainer {
   position: relative;
   display: flex;
@@ -270,12 +263,6 @@
 }
 
 @media screen and (max-width: 770px) {
-  .cardsHolder__content {
-    padding: 90px 50px 90px 50px;
-  }
-}
-
-@media screen and (max-width: 770px) {
   .cardsHolder__text {
     font-size: 14px;
     line-height: 22px;
@@ -299,23 +286,9 @@
 }
 
 @media screen and (max-width: 650px) {
-  .cardsHolder__content {
-    padding: 70px 14px 70px 14px;
-  }
-}
-
-@media screen and (max-width: 650px) {
   .cardsHolder__text {
     padding-right: 0;
     font-size: 11px;
     line-height: 16px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .cardsHolder__title {
-    padding-bottom: 28px;
-    font-size: 18px;
-    line-height: 22px;
   }
 }

@@ -5,26 +5,24 @@ import RepeatingMode from '../RepeatingMode/RepeatingMode.jsx';
 import add from '../../images/add_button.png';
 import dots from '../../images/dots.png';
 import find from '../../images/find.png';
-import { addNewDeck, removeCard, editCard, deleteDeck, editDeck, getDeckCardsInfo } from '../../services/actions/cards.js';
-import { setCurrentDeck } from '../../services/actions/currentDeck.js';
-import { setCurrentWord } from '../../services/actions/currentWord.js';
+import { addNewDeck, removeCard, editCard, deleteDeck, editDeck, getDeckCardsInfo, deleteCard } from '../../services/actions/cards.js';
+import { setCurrentDeck, setCurrentWord, removeCurrentWord } from '../../services/actions/currentDeck.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 function CurrentWord(props) {
 
   //const { cards } = useSelector(state => state.cardsReducer);
   //const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen} = props;
-  const { currentDeck } = useSelector(state => state.currentDeckReducer);
-  const { currentWord } = useSelector(state => state.currentWordReducer);
+  const { currentDeck, currentWord } = useSelector(state => state.currentDeckReducer);
   const { decks, deckCards } = useSelector(state => state.cardsReducer);
   const dispatch = useDispatch();
 
-  /*function removeDeck() {
-    dispatch(deleteDeck(currentDeck.slug));
-    dispatch(setCurrentDeck(decks[0]));
+  function removeDeck() {
+    dispatch(deleteCard(currentDeck.slug, currentWord.id));
+    dispatch(removeCurrentWord());
   }
 
-  function editCurrentDeck() {
+  /*function editCurrentDeck() {
     setEditDeckModalIsOpen(true);
   }*/
 
@@ -56,7 +54,8 @@ function CurrentWord(props) {
         </button>
         <button 
           type="button" 
-          className="addNewDeckForm__addButton addNewDeckForm__button-disabled">
+          className="addNewDeckForm__addButton addNewDeckForm__button-disabled"
+          onClick={removeDeck}>
           DELETE
         </button> 
       </div>

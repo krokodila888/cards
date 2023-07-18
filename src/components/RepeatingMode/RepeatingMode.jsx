@@ -103,7 +103,7 @@ function RepeatingMode(props) {
           {word()}
         </div>
         <input 
-          placeholder="Место для правильного значения" 
+          placeholder="Print your word here" 
           value={repeatingForm.word} 
           id='cardsHolderRepeatingInput'
           type="text"
@@ -114,17 +114,17 @@ function RepeatingMode(props) {
           autoComplete="off" />
         <div className='cardsHolder__button-block'>
           <button 
-            className='cardsHolder__button'
+            className='cardsHolder__button2'
             onClick={showTranslation}>
               SHOW WORD
           </button>
           <button 
-            className='cardsHolder__button'
+            className='cardsHolder__button2'
             onClick={stopRepeating}>
               FINISH REPEATING
           </button>
           <button 
-            className='cardsHolder__button'
+            className='cardsHolder__button2'
             onClick={nextWord1}>
               NEXT ONE
           </button>

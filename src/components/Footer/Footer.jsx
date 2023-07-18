@@ -4,6 +4,14 @@ import './Footer.css';
 function Footer() {
   return (
     <footer className="footer">
+
+    </footer>
+  );
+}
+  
+export default Footer;
+
+/*
       <div className="footer__content">
         <p className="footer__title">
           Пет-проект. Сделан руками ради интереса и практики
@@ -34,8 +42,4 @@ function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-  );
-}
-  
-export default Footer;
+      */

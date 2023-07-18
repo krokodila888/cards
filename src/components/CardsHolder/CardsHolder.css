@@ -15,10 +15,11 @@
 
 .cardsHolder__input {
   display: block;
-  height: 40px;
-  border-radius: 20px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 8px;
   padding-left: 20px;
-  background-color: rgb(255, 255, 243);
+  background-color: rgb(255 255 255);
   border: 1px solid #e4e3de;
   margin-bottom: 15px;
 } 
@@ -68,8 +69,8 @@
   width: 100px;
 }
 
-.cardsHolder__button {
-  text-decoration: none;
+.cardsHolder__button2 {
+  /*text-decoration: none;
   border: none;
   position: relative;
   overflow: hidden;
@@ -78,16 +79,22 @@
   font-weight: 600;
   border-radius: 20px;
   background-color: rgb(226, 226, 226);
-  margin: 15px;
+  margin: 15px;*/
+  background-color: #3C4548;
+  color: #E6F6DF;
+  height: 58px;
+  width: 158px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.cardsHolder__button:hover {
-  box-shadow: 1px 1px 25px 10px rgba(106, 108, 108, 0.4);
-  background: linear-gradient(to right, rgb(151, 228, 237), transparent, rgb(192, 249, 255));
-  text-shadow: #333;
+.cardsHolder__button2:hover {
   transition: all .5s;
-  transform: scale(1.1);
-  border: none;
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .cardsHolder__button1 {
@@ -112,11 +119,9 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 60px 70px 100px 70px;
-  max-width: 1140px;
+  padding: 0px 70px 100px 70px;
+  width: 740px;
   min-height: 400px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .cardsHolder__decksContainer {
@@ -124,7 +129,7 @@
   display: flex;
   flex-direction: row;
   gap: 24px;
-  max-width: 1140px;
+  max-width: 740px;
   flex-wrap: wrap;
 }
 
@@ -204,7 +209,7 @@
 
 @media screen and (max-width: 770px) {
   .cardsHolder__content {
-    padding: 90px 50px 90px 50px;
+    padding: 0px 50px 90px 50px;
   }
 }
 
@@ -233,7 +238,7 @@
 
 @media screen and (max-width: 650px) {
   .cardsHolder__content {
-    padding: 70px 14px 70px 14px;
+    padding: 0px 14px 70px 14px;
   }
 }
 

@@ -89,6 +89,11 @@ function App() {
     setEditWordModalIsOpen(false);
   }
 
+  function handleLogout() {
+    localStorage.clear();
+    setLoggedIn(false);
+  }
+
   /*useEffect(() => {
     if (sendLogin.access) {
       localStorage.setItem('token', sendLogin.access);
@@ -145,7 +150,8 @@ function App() {
                 editWordModalIsOpen={editWordModalIsOpen}
                 setEditWordModalIsOpen={setEditWordModalIsOpen}
                 closeModal={closeModal}
-                setLoggedIn={setLoggedIn}/>
+                setLoggedIn={setLoggedIn}
+                handleLogout={handleLogout}/>
             }>  
           </Route>
           <Route 

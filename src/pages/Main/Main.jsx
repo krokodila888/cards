@@ -15,7 +15,7 @@ import Modal from "../../components/Modal/Modal";
 import './Main.css';
 
 function Main(props) {
-  const {loggedIn, setLoggedIn, closeModal, addDeckModalIsOpen, setAddDeckModalIsOpen, editDeckModalIsOpen, setEditDeckModalIsOpen, addWordModalIsOpen, setAddWordModalIsOpen, editWordModalIsOpen, setEditWordModalIsOpen} = props;
+  const {loggedIn, setLoggedIn, closeModal, addDeckModalIsOpen, setAddDeckModalIsOpen, editDeckModalIsOpen, setEditDeckModalIsOpen, addWordModalIsOpen, setAddWordModalIsOpen, editWordModalIsOpen, setEditWordModalIsOpen, handleLogout} = props;
   //const dispatch = useDispatch();
   const [showLogin, setShowLogin] = React.useState(true);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
@@ -32,14 +32,11 @@ function Main(props) {
     setAddWordModalIsOpen(false)
   }
 
-  function handleLogout() {
-    localStorage.clear();
-    setLoggedIn(false);
-  }
-
   return (
     <>
-      <Header/>
+      <Header 
+        handleLogout={handleLogout}
+        loggedIn={loggedIn}/>
       <div className="main__content">
         <main className="profile">
           {!loggedIn && 
@@ -62,12 +59,6 @@ function Main(props) {
               setEditDeckModalIsOpen={setEditDeckModalIsOpen}
               setAddWordModalIsOpen={setAddWordModalIsOpen}/>}
         </main>
-        {loggedIn && 
-        <button
-          onClick={handleLogout}
-          className="addNewDeckForm__addButton">
-          EXIT
-        </button>}
       </div>
       <Footer/>
       <Modal

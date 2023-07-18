@@ -3,8 +3,17 @@
 .header {
   background-color: #ffffff;
   position: relative;
-  /*display: flex;
-  flex-direction: column;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  align-items: center;
+  margin: 40px 40px 90px 40px;
+}
+
+.header button {
+  margin: 0;
 }
 
 .header__content {
@@ -110,9 +119,10 @@
 .header__link-text {
   text-decoration: none;
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  line-height: 40px;
-  color: rgb(22, 15, 78);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
   margin: 0;
 }
 

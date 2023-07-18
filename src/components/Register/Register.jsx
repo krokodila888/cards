@@ -78,7 +78,7 @@ function Register(props) {
             />
           </Link>
           <p className="register__title">
-            Добро пожаловать!
+            WELCOME TO BRAINDECKS
           </p>
           <form 
             onSubmit={handleSubmit} 
@@ -104,7 +104,7 @@ function Register(props) {
               className="register__text input-emailRegister-error register__input-error" 
               id='emailSpanRegister'> </span>
             <span className="register__text">
-              Пароль
+              Password
             </span>
             <input 
               required
@@ -130,17 +130,17 @@ function Register(props) {
               className="register__button register__button-active button_type_primary"
               disabled
               id="buttonRegister">
-                Зарегистрироваться
+                REGISTER
             </button>
           </form>
           <div className="register__link-container">
             <p className="register__underbottom-text">
-              Уже зарегистрированы?
+              Already registered?
             </p>
             <p 
               onClick={changeToLogin}
               className="register__underbottom-text register__link">
-                Войти
+                LOG IN
             </p>
           </div>
         </div>  
