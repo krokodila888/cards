@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import './EditWordForm.css';
 import { addNewDeck, removeCard, editCard, addNewCard } from '../../services/actions/cards.js';
+import { setCurrentWord } from '../../services/actions/currentDeck.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 function EditWordForm (props) {
   const {editWordModalIsOpen, closeEditWordModal} = props;
   const dispatch = useDispatch();
-  const { decks } = useSelector(state => state.cardsReducer);
-  const { currentDeck } = useSelector(state => state.currentDeckReducer);
-  const { currentWord } = useSelector(state => state.currentWordReducer);
+  const { deckCards, editCardRequestRes } = useSelector(state => state.cardsReducer);
+  const { currentDeck, currentWord } = useSelector(state => state.currentDeckReducer);
   const [form, setValue] = useState({front_side: '', back_side: '', prompt: '', example: '' });
   const [deckSlug, setDeckSlug] = useState('');
   const titleInput = document.getElementById('titleAddFormInput');
@@ -18,15 +18,8 @@ function EditWordForm (props) {
   const titleErrorSpan = document.getElementById('titleSpanAddForm');
   const descriptionErrorSpan = document.getElementById('descriptionSpanAddForm');
 
-  /*function validate() {
-    if(titleInput && descriptionInput && !(titleInput.validationMessage || descriptionInput.validationMessage)) 
-    return (submitButton.classList.remove('editProfileForm__button-disabled'), submitButton.classList.add('editProfileForm__button-active', 'button_type_primary'), submitButton.disabled = false); 
-    else if (titleInput && descriptionInput) return (submitButton.classList.remove('editProfileForm__button-active', 'button_type_primary'), submitButton.classList.add('editProfileForm__button-disabled'), submitButton.disabled = true)
-  }*/
-
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
-    //validate()
   };
 
   useEffect(()=> {
@@ -35,24 +28,6 @@ function EditWordForm (props) {
       setValue({front_side: currentWord.front_side, back_side: currentWord.back_side, prompt: currentWord.prompt, example: currentWord.example })
     }
   }, [editWordModalIsOpen])
-
-  /*useEffect(()=> {
-    if (addDeckModalIsOpen) {
-    setValue({ ...form, title: `DECK #${decks.length + 1}`, descriptionInput: '' });
-    titleInput.placeholder = `DECK #${decks.length + 1}`;
-  }
-    if (addDeckModalIsOpen && submitButton !== null) {
-      submitButton.classList.remove('editProfileForm__button-active', 'button_type_primary');
-      submitButton.classList.add('editProfileForm__button-disabled');
-      submitButton.disabled = true;
-    };
-  if (addDeckModalIsOpen && titleErrorSpan && titleErrorSpan.textContent !== null) {
-    titleErrorSpan.textContent = ''; 
-  }
-  if (addDeckModalIsOpen && descriptionErrorSpan && descriptionErrorSpan.textContent !== null) {
-    descriptionErrorSpan.textContent = ''; 
-  }
-  }, [addDeckModalIsOpen])*/
 
   function handleSubmit(e) {
     e.preventDefault();

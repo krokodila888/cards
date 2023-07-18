@@ -225,7 +225,8 @@ export const cardsReducer = (state = initialState, action) => {
       let newCards = state.deckCards.map(item => {if (item.id === action.editedCard.id) {console.log (item); return action.editedCard} else return item});
       return {
         ...state,
-        deckCards: newCards
+        deckCards: newCards,
+        editCardRequestRes: action.editedCard
       };
     }
     case EDIT_CARD_FAILED: {

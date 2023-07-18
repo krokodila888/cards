@@ -13,11 +13,10 @@ import { useSelector, useDispatch } from 'react-redux';
 function CurrentDeck(props) {
 
   //const { cards } = useSelector(state => state.cardsReducer);
-  const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen} = props;
+  const {setAddDeckModalIsOpen, setEditDeckModalIsOpen, setAddWordModalIsOpen, setEditWordModalIsOpen, editWordModalIsOpen, repeatMode, setRepeatMode} = props;
   const { currentDeck, currentWord } = useSelector(state => state.currentDeckReducer);
-  const { decks, deckCards } = useSelector(state => state.cardsReducer);
+  const { decks, deckCards, editCardRequestRes } = useSelector(state => state.cardsReducer);
   const dispatch = useDispatch();
-  const [repeatMode, setRepeatMode] = useState(false);
   const [searchForm, setSearchFormValue] = useState({ search: '' });
 
   useEffect(() => {
@@ -58,6 +57,13 @@ function CurrentDeck(props) {
     console.log(item);
     dispatch(setCurrentWord(item));
   }
+
+  useEffect(()=> {
+    if (!editWordModalIsOpen && editCardRequestRes) {
+      console.log(/*deckCards.filter(item => item.id === currentWord.id)*/currentWord);
+      dispatch(setCurrentWord(editCardRequestRes))
+    }
+  }, [editCardRequestRes])
 
   return (
     <section id="currentDeck">
