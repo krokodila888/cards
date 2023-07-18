@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import './AddNewWordForm.css';
+import './EditWordForm.css';
 import { addNewDeck, removeCard, editCard, addNewCard } from '../../services/actions/cards.js';
 import { useSelector, useDispatch } from 'react-redux';
 
-function AddNewWordForm (props) {
-  const {addWordModalIsOpen, closeAddWordModal} = props;
+function EditWordForm (props) {
+  const {editWordModalIsOpen, closeEditWordModal} = props;
   const dispatch = useDispatch();
   const { decks } = useSelector(state => state.cardsReducer);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
+  const { currentWord } = useSelector(state => state.currentWordReducer);
   const [form, setValue] = useState({front_side: '', back_side: '', prompt: '', example: '' });
   const [deckSlug, setDeckSlug] = useState('');
   const titleInput = document.getElementById('titleAddFormInput');
@@ -29,8 +30,11 @@ function AddNewWordForm (props) {
   };
 
   useEffect(()=> {
-    setDeckSlug(currentDeck.slug)
-  }, [addWordModalIsOpen])
+    if (editWordModalIsOpen) {
+      setDeckSlug(currentDeck.slug);
+      setValue({front_side: currentWord.front_side, back_side: currentWord.back_side, prompt: currentWord.prompt, example: currentWord.example })
+    }
+  }, [editWordModalIsOpen])
 
   /*useEffect(()=> {
     if (addDeckModalIsOpen) {
@@ -54,14 +58,15 @@ function AddNewWordForm (props) {
     e.preventDefault();
     console.log({deckSlug, form});
     console.log(form);
-    dispatch(addNewCard(deckSlug, form));
-    closeAddWordModal()
+    console.log(currentWord.id);
+    dispatch(editCard(deckSlug, currentWord.id, form));
+    closeEditWordModal()
   }
 
   return(
     <div className="addNewDeckForm">
       <h2 className="addNewDeckForm__title">
-        NEW WORD
+        EDIT WORD
       </h2>
       <div className="addNewDeckForm__container">
         <form 
@@ -140,7 +145,7 @@ function AddNewWordForm (props) {
             type="submit" 
             className="addNewDeckForm__addButton addNewDeckForm__button-disabled" 
             id='buttonSubmitAddWordForm'>
-            ADD
+            SAVE
           </button>
         </form>
         <div className="addNewDeckForm__deck">
@@ -152,4 +157,4 @@ function AddNewWordForm (props) {
   )
 }
 
-export default AddNewWordForm;
+export default EditWordForm;

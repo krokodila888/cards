@@ -220,6 +220,7 @@ export function editCard(deckID, cardID, data) {
       if (res) {
         dispatch({
           type: EDIT_CARD_SUCCESS,
+          editedCardRes: res,
           editedCard: res
         })
       } else {
@@ -241,10 +242,11 @@ export function deleteCard(deckID, cardID) {
       type: DELETE_CARD
     })
     api.removeCard(deckID, cardID).then( res  => {
-      if (res) {
+      if (res === (204 || 200)) {
         dispatch({
           type: DELETE_CARD_SUCCESS,
-          deletedCard: {res, deckID, cardID}
+          deletedCard: cardID,
+          deletedCardRes: res,
         })
       } else {
         dispatch({

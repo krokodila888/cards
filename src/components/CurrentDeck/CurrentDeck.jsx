@@ -114,7 +114,8 @@ function CurrentDeck(props) {
           </button> 
         </div>
         {currentWord && currentWord !== null &&
-          <CurrentWord/>
+          <CurrentWord 
+          setEditWordModalIsOpen={setEditWordModalIsOpen}/>
         }
       </section>
       <div className="cardsHolder__wordsContainer">

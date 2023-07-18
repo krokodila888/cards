@@ -10,6 +10,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import EditDeckForm from '../../components/EditDeckForm/EditDeckForm.jsx';
 import AddNewDeckForm from '../../components/AddNewDeckForm/AddNewDeckForm.jsx';
 import AddNewWordForm from '../../components/AddNewWordForm/AddNewWordForm.jsx';
+import EditWordForm from '../../components/EditWordForm/EditWordForm.jsx';
 
 import Modal from "../../components/Modal/Modal";
 import './Main.css';
@@ -30,6 +31,10 @@ function Main(props) {
 
   function closeAddWordModal() {
     setAddWordModalIsOpen(false)
+  }
+
+  function closeEditWordModal() {
+    setEditWordModalIsOpen(false)
   }
 
   function handleLogout() {
@@ -60,7 +65,9 @@ function Main(props) {
               setAddDeckModalIsOpen={setAddDeckModalIsOpen}
               editDeckModalIsOpen={editDeckModalIsOpen}
               setEditDeckModalIsOpen={setEditDeckModalIsOpen}
-              setAddWordModalIsOpen={setAddWordModalIsOpen}/>}
+              setAddWordModalIsOpen={setAddWordModalIsOpen}
+              setEditWordModalIsOpen={setEditWordModalIsOpen}
+              editWordModalIsOpen={editWordModalIsOpen}/>}
         </main>
         {loggedIn && 
         <button
@@ -93,6 +100,14 @@ function Main(props) {
           <AddNewWordForm 
             closeAddWordModal={closeAddWordModal}
             addWordModalIsOpen={addWordModalIsOpen} />}>
+      </Modal>
+      <Modal
+        isOpen={editWordModalIsOpen}
+        onClose={closeModal}
+        children={
+          <EditWordForm 
+            closeEditWordModal={closeEditWordModal}
+            editWordModalIsOpen={editWordModalIsOpen} />}>
       </Modal>
 
     </>

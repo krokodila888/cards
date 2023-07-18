@@ -57,6 +57,8 @@ const initialState = {
   removeCardRequest: false,
   removeCardRequestFailed: false,
   removeCardRequestRes: null,
+  getDeckCardsRequest: false,
+  getDeckCardsRequestFailed: false,
   deckCards: null
 }
 
@@ -119,11 +121,25 @@ export const cardsReducer = (state = initialState, action) => {
         decks: [...decksAfterDeleting]
       };
     }
+    case EDIT_DECK: {
+      return {
+        ...state,
+        editDeckRequest: true,
+        editDeckRequestFailed: false,
+      };
+    }
     case EDIT_DECK_SUCCESS: {
       let newDecks = state.decks.map(item => {if (item.slug === action.editedDeck.slug) {console.log (item); return action.editedDeck} else return item});
       return {
         ...state,
         decks: newDecks
+      };
+    }
+    case EDIT_DECK_FAILED: {
+      return { 
+        ...state, 
+        editDeckRequestFailed: true, 
+        editDeckRequest: false 
       };
     }
     case ADD_CARD: {
@@ -151,11 +167,71 @@ export const cardsReducer = (state = initialState, action) => {
         addCardRequest: false 
       };
     }
+    case GET_DECK_CARDS: {
+      return {
+        ...state,
+        getDeckCardsRequest: true,
+        getDeckCardsRequestFailed: false,
+      };
+    }
     case GET_DECK_CARDS_SUCCESS: {
       //let newDecks = state.decks.map(item => {if (item.slug === action.editedDeck.slug) {console.log (item); return action.editedDeck} else return item});
       return {
         ...state,
         deckCards: action.deckCards
+      };
+    }
+    case GET_DECK_CARDS_FAILED: {
+      return { 
+        ...state,
+        getDeckCardsRequestFailed: true, 
+        getDeckCardsRequestt: false 
+      };
+    }
+    case DELETE_CARD: {
+      return {
+        ...state,
+        removeCardRequest: true,
+        removeCardRequestFailed: false,
+      };
+    }
+    case DELETE_CARD_SUCCESS: {
+      console.log(action);
+      let cardsAfterDeleting = state.deckCards.filter(
+        (item1) => (item1.id !== action.deletedCard)
+      );
+      console.log(cardsAfterDeleting);
+      return {
+        ...state,
+        deckCards: [...cardsAfterDeleting]
+      };
+    }
+    case DELETE_CARD_FAILED: {
+      return { 
+        ...state,
+        removeCardRequestFailed: true, 
+        removeCardRequest: false 
+      };
+    }
+    case EDIT_CARD: {
+      return {
+        ...state,
+        editCardRequest: true,
+        editCardRequestFailed: false,
+      };
+    }
+    case EDIT_CARD_SUCCESS: {
+      let newCards = state.deckCards.map(item => {if (item.id === action.editedCard.id) {console.log (item); return action.editedCard} else return item});
+      return {
+        ...state,
+        deckCards: newCards
+      };
+    }
+    case EDIT_CARD_FAILED: {
+      return { 
+        ...state, 
+        editCardRequestFailed: true, 
+        editCardRequest: false 
       };
     }
     default: {
