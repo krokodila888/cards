@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   background-color: #798992;
+  margin-top: 60px;
 }
 
 .currentDeck__dotsBlock {
@@ -92,11 +93,19 @@
   padding: 4px;
   font-weight: 700;
   border-radius: 5px;
+  min-width: 70px;
+  text-align: center;
+}
+
+.currentDeck__word:hover {
+  cursor: pointer;
+  opacity: 0.4;
+  transition: 0.8s;
 }
 
 .currentDeck__button-container {
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
 }
 
 @media screen and (max-width: 570px) {
@@ -144,28 +153,6 @@
   width: 100px;
 }
 
-.cardsHolder__button {
-  text-decoration: none;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  height: 40px;
-  width: 200px;
-  font-weight: 600;
-  border-radius: 20px;
-  background-color: rgb(226, 226, 226);
-  margin: 15px;
-}
-
-.cardsHolder__button:hover {
-  box-shadow: 1px 1px 25px 10px rgba(106, 108, 108, 0.4);
-  background: linear-gradient(to right, rgb(151, 228, 237), transparent, rgb(192, 249, 255));
-  text-shadow: #333;
-  transition: all .5s;
-  transform: scale(1.1);
-  border: none;
-}
-
 .cardsHolder__button1 {
   margin-top: 20px;
 }
@@ -180,28 +167,6 @@
   .cardsHolder__button-block {
     flex-direction: column;
   }
-}
-
-.cardsHolder__content {
-  justify-items: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 60px 70px 100px 70px;
-  max-width: 1140px;
-  min-height: 400px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.cardsHolder__decksContainer {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  max-width: 1140px;
-  flex-wrap: wrap;
 }
 
 .currentDeck__subtitle {
@@ -270,12 +235,6 @@
 }
 
 @media screen and (max-width: 770px) {
-  .cardsHolder__content {
-    padding: 90px 50px 90px 50px;
-  }
-}
-
-@media screen and (max-width: 770px) {
   .cardsHolder__text {
     font-size: 14px;
     line-height: 22px;
@@ -295,12 +254,6 @@
   .cardsHolder__text-block {
     flex-direction: column-reverse;
     padding-top: 60px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .cardsHolder__content {
-    padding: 70px 14px 70px 14px;
   }
 }
 

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import './Header.css';
 import React from "react";
 
-function Header() {
-  //const {loggedIn} = props;
+function Header(props) {
+  const {loggedIn, handleLogout} = props;
   /*const [isBigger, setIsBigger] = React.useState(true);
   const [width, setWidth] = React.useState(window.innerWidth);*/
 
@@ -29,7 +29,13 @@ function Header() {
 
   return (
     <header className="header">
-      <h1 className="header__title header__link-text">Excellent place to memorize words</h1>
+      <h1 className="header__title">Excellent place to memorize words</h1>
+      {loggedIn && 
+        <button
+          onClick={handleLogout}
+          className="header__exitButton">
+          EXIT
+        </button>}
     </header>
     );
   }

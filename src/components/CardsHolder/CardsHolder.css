@@ -69,24 +69,19 @@
 }
 
 .cardsHolder__button {
-  text-decoration: none;
+  background-color: #3C4548;
+  color: #E6F6DF;
+  height: 58px;
+  width: 158px;
   border: none;
-  position: relative;
-  overflow: hidden;
-  height: 40px;
-  width: 200px;
-  font-weight: 600;
-  border-radius: 20px;
-  background-color: rgb(226, 226, 226);
-  margin: 15px;
+  border-radius: 5px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .cardsHolder__button:hover {
-  box-shadow: 1px 1px 25px 10px rgba(106, 108, 108, 0.4);
-  background: linear-gradient(to right, rgb(151, 228, 237), transparent, rgb(192, 249, 255));
-  text-shadow: #333;
+  cursor: pointer;
   transition: all .5s;
-  transform: scale(1.1);
   border: none;
 }
 
@@ -124,7 +119,7 @@
   display: flex;
   flex-direction: row;
   gap: 24px;
-  max-width: 1140px;
+  max-width: 740px;
   flex-wrap: wrap;
 }
 

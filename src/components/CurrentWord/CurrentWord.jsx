@@ -40,10 +40,10 @@ function CurrentWord(props) {
           className="currentDeck__word">
           {currentWord.back_side}
         </p>
-        {currentWord.description !== '' && 
+        {currentWord.example !== '' && currentWord.example !== ' ' &&
         <p 
           className="currentDeck__word">
-          {currentWord.description}
+          {currentWord.example}
         </p>
         }
       </div>
