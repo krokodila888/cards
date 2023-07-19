@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.bc7e3535.css",
-    "main.js": "/cards/static/js/main.b00dbac1.js",
+    "main.css": "/cards/static/css/main.cc007a4f.css",
+    "main.js": "/cards/static/js/main.20987d84.js",
     "static/media/Inter-Medium.woff": "/cards/static/media/Inter-Medium.7ddb89dcdb33dd761944.woff",
     "static/media/Inter-Medium.woff2": "/cards/static/media/Inter-Medium.6db7e439cc4b0e5c0cd2.woff2",
     "static/media/Inter-Black.woff": "/cards/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -10,11 +10,11 @@
     "static/media/Inter-Regular.woff2": "/cards/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
     "index.html": "/cards/index.html",
     "static/media/exit-menu.svg": "/cards/static/media/exit-menu.10925cfa0417ea2e6714c3a79e522d1f.svg",
-    "main.bc7e3535.css.map": "/cards/static/css/main.bc7e3535.css.map",
-    "main.b00dbac1.js.map": "/cards/static/js/main.b00dbac1.js.map"
+    "main.cc007a4f.css.map": "/cards/static/css/main.cc007a4f.css.map",
+    "main.20987d84.js.map": "/cards/static/js/main.20987d84.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc7e3535.css",
-    "static/js/main.b00dbac1.js"
+    "static/css/main.cc007a4f.css",
+    "static/js/main.20987d84.js"
   ]
 }
