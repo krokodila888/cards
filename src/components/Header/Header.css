@@ -23,6 +23,7 @@
   margin-right: auto;
   background-color: #ffffff;
   height: 100px;
+  justify-content: center;
 }
 
 .header__underline {

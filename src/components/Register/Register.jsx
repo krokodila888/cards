@@ -70,15 +70,13 @@ function Register(props) {
     <>
       <section className='register__background'>
         <div className="register__container">
-          <Link to="/">
-            <img
+          <img
               src={logo}
               alt="Логотип"
               className="register__logo"
             />
-          </Link>
           <p className="register__title">
-            Добро пожаловать!
+            Greetings!!
           </p>
           <form 
             onSubmit={handleSubmit} 
@@ -104,7 +102,7 @@ function Register(props) {
               className="register__text input-emailRegister-error register__input-error" 
               id='emailSpanRegister'> </span>
             <span className="register__text">
-              Пароль
+              Password
             </span>
             <input 
               required
@@ -135,12 +133,12 @@ function Register(props) {
           </form>
           <div className="register__link-container">
             <p className="register__underbottom-text">
-              Уже зарегистрированы?
+              Already registered?
             </p>
             <p 
               onClick={changeToLogin}
               className="register__underbottom-text register__link">
-                Войти
+                Login
             </p>
           </div>
         </div>  

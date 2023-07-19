@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './Login.css';
 import { login, getUserData } from '../../services/actions/auth';
+import logo from '../../images/add.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllDecks } from '../../services/actions/cards';
 
@@ -60,8 +61,13 @@ function Login (props) {
   return(
     <section className="login__background">
       <div className="login__container">
+        <img
+          src={logo}
+          alt="Логотип"
+          className="register__logo"
+        />
         <p className="login__title">
-          С возвращением!
+          Greetings!
         </p>
         <form onSubmit={e => {handleLogin(e)}} className="login__form-container">
           <span className="login__text">
@@ -86,7 +92,7 @@ function Login (props) {
             id='emailSpanLogin'> 
           </span>
           <span className="login__text">
-            Пароль
+            Password
           </span>
           <input 
             formNoValidate
@@ -94,7 +100,7 @@ function Login (props) {
             id="passwordLogin" 
             name="password" 
             type="password" 
-            placeholder="Пароль"
+            placeholder="Password"
             autoComplete="on" 
             value={password} 
             onChange={e => {
@@ -113,17 +119,17 @@ function Login (props) {
             id="buttonLogin"
             disabled
             className="login__button login__button-active button_type_primary">
-              Войти
+              LOGIN
           </button>
         </form>
         <div className="login__link-container">
           <p className="login__underbottom-text">
-            Ещё не зарегистрированы?
+            Not registered yet?
           </p>
           <p 
             className="login__underbottom-text login__link"
             onClick={changeToRegister}>
-              Регистрация
+              Register
           </p>
         </div>
       </div>  
