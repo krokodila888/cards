@@ -62,6 +62,12 @@
   font-weight: 700;
 }
 
+.addNewDeckForm__addButton:hover {
+  cursor: pointer;
+  opacity: 0.4;
+  transition: 0.6s;
+}
+
 .addNewDeckForm__button-disabled {
   background: #3C4548;
   cursor: default;

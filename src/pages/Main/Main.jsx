@@ -11,6 +11,7 @@ import EditDeckForm from '../../components/EditDeckForm/EditDeckForm.jsx';
 import AddNewDeckForm from '../../components/AddNewDeckForm/AddNewDeckForm.jsx';
 import AddNewWordForm from '../../components/AddNewWordForm/AddNewWordForm.jsx';
 import EditWordForm from '../../components/EditWordForm/EditWordForm.jsx';
+import RepeatingMode from '../../components/RepeatingMode/RepeatingMode.jsx';
 
 import Modal from "../../components/Modal/Modal";
 import './Main.css';
@@ -20,6 +21,7 @@ function Main(props) {
   //const dispatch = useDispatch();
   const [showLogin, setShowLogin] = React.useState(true);
   const { currentDeck } = useSelector(state => state.currentDeckReducer);
+  const [repeatMode, setRepeatMode] = React.useState(false);
 
   function closeAddDeckModalIsOpen() {
     setAddDeckModalIsOpen(false)
@@ -44,9 +46,11 @@ function Main(props) {
 
   return (
     <>
-      <Header/>
+      <Header 
+        loggedIn={loggedIn} 
+        handleLogout={handleLogout} />
       <div className="main__content">
-        <main className="profile">
+        <main className="main">
           {!loggedIn && 
           <>
             {showLogin && 
@@ -58,8 +62,9 @@ function Main(props) {
           </>}
           {loggedIn && 
             <CardsHolder
-              setAddDeckModalIsOpen={setAddDeckModalIsOpen}/>}
-          {loggedIn && currentDeck !== {} && currentDeck !== null && currentDeck !== undefined &&
+              setAddDeckModalIsOpen={setAddDeckModalIsOpen}/>
+          }
+          {loggedIn && currentDeck !== {} && currentDeck !== null && currentDeck !== undefined && !repeatMode &&
             <CurrentDeck 
               addDeckModalIsOpen={addDeckModalIsOpen}
               setAddDeckModalIsOpen={setAddDeckModalIsOpen}
@@ -67,14 +72,14 @@ function Main(props) {
               setEditDeckModalIsOpen={setEditDeckModalIsOpen}
               setAddWordModalIsOpen={setAddWordModalIsOpen}
               setEditWordModalIsOpen={setEditWordModalIsOpen}
-              editWordModalIsOpen={editWordModalIsOpen}/>}
+              editWordModalIsOpen={editWordModalIsOpen}
+              setRepeatMode={setRepeatMode}/>
+          }
+          {repeatMode && 
+            <RepeatingMode 
+              setRepeatMode={setRepeatMode} />
+          }
         </main>
-        {loggedIn && 
-        <button
-          onClick={handleLogout}
-          className="addNewDeckForm__addButton">
-          EXIT
-        </button>}
       </div>
       <Footer/>
       <Modal

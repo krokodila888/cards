@@ -78,10 +78,10 @@ function RepeatingMode(props) {
   useEffect(()=> {
     if (repeatingInput && (currentWord.front_side === repeatingForm.word)) 
     {setIsCorrect(true);
-    repeatingInput.classList.add('cardsHolder__input_active');};
+    repeatingInput.classList.add('repeatingMode__input_active');};
     if (repeatingInput && (currentWord.front_side !== repeatingForm.word) && isCorrect) {
       setIsCorrect(false);
-      repeatingInput.classList.remove('cardsHolder__input_active');};
+      repeatingInput.classList.remove('repeatingMode__input_active');};
   }, [repeatingForm])
 
   function nextWord1() {
@@ -89,7 +89,7 @@ function RepeatingMode(props) {
     setShowWord(false);
     setIsCorrect(false);
     setMeaning({ ...repeatingForm, word: '' });
-    repeatingInput.classList.remove('cardsHolder__input_active');
+    repeatingInput.classList.remove('repeatingMode__input_active');
     if (wordsToRepeat.length > 1) {setCurrentWord(wordsToRepeat[1]); 
     setWordsToRepeat(wordsToRepeat.slice(1));}
     else {setCurrentWord({front_side: 'Правда все. Добавьте новые карточки (или подождите, пока мы добавим кнопку "Начать заново"', back_side: 'Вы повторили все!'})}
@@ -103,14 +103,14 @@ function RepeatingMode(props) {
           {word()}
         </div>
         <input 
-          placeholder="Место для правильного значения" 
+          placeholder="PRINT MEANING HERE" 
           value={repeatingForm.word} 
           id='cardsHolderRepeatingInput'
           type="text"
           name="word" 
           onChange={onRepeatChange}
           required
-          className='cardsHolder__input'
+          className='repeatingMode__input'
           autoComplete="off" />
         <div className='cardsHolder__button-block'>
           <button 
